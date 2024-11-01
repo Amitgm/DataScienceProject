@@ -44,7 +44,7 @@ class DataValidation:
 
                     with open(self.config.STATUS_FILE,"w") as f:
 
-                        f.write(f"validation status {validation_status}" )
+                        f.write(f"Validation status: {validation_status}" )
 
             return validation_status 
         

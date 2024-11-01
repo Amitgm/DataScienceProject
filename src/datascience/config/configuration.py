@@ -1,7 +1,7 @@
 # all the configuration file goes here
 from src.datascience.utils.common import read_yaml,create_directory
 from src.datascience.constants import *
-from src.datascience.entity.config_enitity import DataIngestionconfig,DataValidationconfig
+from src.datascience.entity.config_enitity import DataIngestionconfig,DataValidationconfig,DataTransformationconfig
 
 # updating the configuration manager
 class ConfigurationManager:
@@ -62,4 +62,22 @@ class ConfigurationManager:
         )
 
         return data_validation_config
+    
+
+    def get_data_transformation_config(self) -> DataTransformationconfig:
+
+
+        config = self.config.data_transformation
+       
+
+        create_directory([config.root_dir])
+
+        data_transformation_config = DataTransformationconfig    (
+
+            root_dir=Path(config.root_dir),
+            data_path =Path(config.data_path),
+    
+        )
+
+        return data_transformation_config
 

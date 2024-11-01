@@ -5,6 +5,7 @@ MUST BE DEFINED AS logger = logging.getLogger("datasciencelogger") IN __INIT__.P
 from src.datascience import logger
 from src.datascience.pipeline.data_ingestion import DataIngestionPipeline
 from src.datascience.pipeline.data_validation import DataValidationPipeline
+from src.datascience.pipeline.data_transformation import DataTransformationPipeline
 logger.info("Welcome to our custom logger!")
 
 
@@ -43,6 +44,25 @@ except Exception as e:
         logger.exception(f"Exception occurred in pipeline {stage_name}")
 
         raise e
+
+stage_name = "DATA TRANSFORMATION PIPELINE STAGE"
+
+try:
+
+        logger.info(f"Starting pipeline {stage_name}")
+
+        data_transformation = DataTransformationPipeline()
+
+        data_transformation.initiate_transformation_pipeline()
+        
+        logger.info(f"Finished pipeline {stage_name}")
+
+except Exception as e:
+
+        logger.exception(f"Exception occurred in pipeline {stage_name}")
+
+        raise e
+
 
 
 
