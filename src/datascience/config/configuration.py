@@ -1,7 +1,7 @@
 # all the configuration file goes here
 from src.datascience.utils.common import read_yaml,create_directory
 from src.datascience.constants import *
-from src.datascience.entity.config_enitity import DataIngestionconfig,DataValidationconfig,DataTransformationconfig
+from src.datascience.entity.config_enitity import DataIngestionconfig,DataValidationconfig,DataTransformationconfig,ModelTrainerConfig
 
 # updating the configuration manager
 class ConfigurationManager:
@@ -80,4 +80,39 @@ class ConfigurationManager:
         )
 
         return data_transformation_config
+    
+
+    def get_model_trainer(self) -> ModelTrainerConfig:
+
+        
+
+        config = self.config.model_trainer
+        # we are getting all the parameters
+
+        params = self.param.ElasticNet
+
+        schema = self.schema.TARGET_COLUMN
+        
+
+        create_directory([config.root_dir])
+
+        # creating the object with all the class attributes/members/parameters
+
+        model_trainer_config = ModelTrainerConfig    (
+
+
+            root_dir = config.root_dir,
+            train_data_path= config.train_data_path,
+            test_data_path = config.test_data_path,
+            model_path=config.model_path,
+            alpha = params.alpha,
+            l1_ratio = params.l1_Ratio,
+            target_col = schema.name,
+
+        )
+
+        # returning the object
+        return model_trainer_config
+
+
 

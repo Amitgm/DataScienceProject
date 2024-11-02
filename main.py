@@ -6,6 +6,7 @@ from src.datascience import logger
 from src.datascience.pipeline.data_ingestion import DataIngestionPipeline
 from src.datascience.pipeline.data_validation import DataValidationPipeline
 from src.datascience.pipeline.data_transformation import DataTransformationPipeline
+from src.datascience.pipeline.model_trainer import model_training_pipeline
 logger.info("Welcome to our custom logger!")
 
 
@@ -62,6 +63,26 @@ except Exception as e:
         logger.exception(f"Exception occurred in pipeline {stage_name}")
 
         raise e
+
+
+stage_name = "TRAINER STAGE"
+
+try:
+
+        logger.info(f"Starting pipeline {stage_name}")
+
+        model_trainer = model_training_pipeline()
+
+        model_trainer.initiate_model_training()
+
+        logger.info(f"Finished pipeline {stage_name}")
+
+except Exception as e:
+
+        logger.exception(f"Exception occurred in pipeline {stage_name}")
+
+        raise e
+
 
 
 
