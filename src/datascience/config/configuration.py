@@ -1,7 +1,13 @@
 # all the configuration file goes here
-from src.datascience.utils.common import read_yaml,create_directory
+from src.datascience.utils.common import read_yaml,create_directory,save_json
 from src.datascience.constants import *
-from src.datascience.entity.config_enitity import DataIngestionconfig,DataValidationconfig,DataTransformationconfig,ModelTrainerConfig
+from src.datascience.entity.config_enitity import DataIngestionconfig,DataValidationconfig,DataTransformationconfig,ModelTrainerConfig,ModelEvaluatinconfig
+import os
+
+
+# os.environ["MLFLOW_TRACKING_URI"] = "https://dagshub.com/amittimer/DataScienceProject.mlflow"
+# os.environ["MLFLOW_TRACKING_USERNAME"] = "amittimer"
+# os.environ["MLFLOW_TRACKING_PASSWORD"] = "2f89005b2e2d95e60f8bd873d4818a02bad814f6"
 
 # updating the configuration manager
 class ConfigurationManager:
@@ -113,6 +119,32 @@ class ConfigurationManager:
 
         # returning the object
         return model_trainer_config
+    
+
+    def get_model_evaluation_config(self) -> ModelEvaluatinconfig:
+
+        config = self.config.model_evaluation
+
+        params = self.param.ElasticNet
+
+        schema = self.schema.TARGET_COLUMN
+
+        create_directory([config.root_dir])
+
+
+        modelevaluationconfig =  ModelEvaluatinconfig(
+            root_dir = config.root_dir,
+            model_path = config.model_path,
+            test_data_path = config.test_data_path,
+            all_params = params,
+            metrics_path = config.metrics_path,
+            target_column = schema.name,
+            mlflow_uri= os.environ['MLFLOW_TRACKING_URI']
+        )
+
+
+        return modelevaluationconfig
+    
 
 
 
